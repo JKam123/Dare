@@ -15,10 +15,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     let locationManager = CLLocationManager()
     var currentLocation: CLLocation!
+    var DGroup = DispatchGroup()
     //var pointAnnotation:CustomPin!
     //var pinvarotationView:MKPinAnnotationView!
-    @IBOutlet var LongPressRecognizer: UILongPressGestureRecognizer!
-
+    
     func requestLocationAccess() {
         let status = CLLocationManager.authorizationStatus()
         
@@ -47,9 +47,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         DB.loadLocations(completion: {[weak self](V: [Location]) in
             self?.setupMarkers(Locs: V)
         })
-        //LongPressRecognizer.addTarget(<#T##target: Any##Any#>, action: Selector)
-
-        
         
     }
     
@@ -96,17 +93,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let location = view.annotation! as! CustomPin
         print(String(describing: location.title) )
         
-        
-        
-        let myVC = storyboard?.instantiateViewController(withIdentifier: "DetailVC") as! DetailViewController
-        myVC.posterName = location.Data.name
-        myVC.postDescriptionWhy = location.Data.description
-        myVC.postDescriptionWhat = location.Data.description
-        myVC.Coord = CLLocationCoordinate2D(latitude: Double(location.Data.langitude)!, longitude: Double(location.Data.lattitude)!)
-        self.navigationController?.pushViewController(myVC, animated: true)
-        
+       
+            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailVC") as! DetailViewController
+            myVC.postDescriptionWhy = location.Data.name
+            myVC.postDescriptionWhat = location.Data.description
+            myVC.Coord = CLLocationCoordinate2D(latitude: Double(location.Data.langitude)!, longitude: Double(location.Data.lattitude)!)
+            myVC.PosterID = location.Data.user
+            myVC.Timestamp = location.Data.timestamp
+            self.navigationController?.pushViewController(myVC, animated: true)
     }
+    
 
+    
     let regionRadius: CLLocationDistance = 1000
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
@@ -114,22 +112,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapView.setRegion(coordinateRegion, animated: true)
     }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        
-        self.centerMapOnLocation(location: manager.location!)
-        currentLocation = manager.location
+        print(status)
+        //self.centerMapOnLocation(location: locationManager.location!)
+        //currentLocation = manager.location
     }
     @IBAction func recenterPressed(_ sender: Any) {
-        self.centerMapOnLocation(location: currentLocation)
+        //currentLocation = self.locationManager.location
+        //self.centerMapOnLocation(location: currentLocation)
     }
     
-    @IBAction func lonngPressed(sender: UIGestureRecognizer) {
+    
+    @IBAction func longPress(_ sender: AnyObject) {
         if sender.state == UIGestureRecognizerState.ended {
-            let myVC = storyboard?.instantiateViewController(withIdentifier: "NewVC") as! UploadViewController
-            self.navigationController?.pushViewController(myVC, animated: true)
+            //let myVC = storyboard?.instantiateViewController(withIdentifier: "NewVC") as! UploadViewController
+            //self.navigationController?.pushViewController(myVC, animated: true)
+            
         }
-        
+
     }
-    
     @IBAction func logoutPresed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Startup", bundle: nil)
         let mainController = storyboard.instantiateInitialViewController()

@@ -51,7 +51,7 @@ class LoginScreenViewController: UIViewController {
         FIRAuth.auth()?.signIn(withEmail: Mail, password: Pw) { (user, error) in
             if error != nil{
                 let alertController = UIAlertController(title: "Login Failed", message:
-                    error.debugDescription, preferredStyle: UIAlertControllerStyle.alert)
+                    error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil))
                 
                 self.present(alertController, animated: true, completion: nil)

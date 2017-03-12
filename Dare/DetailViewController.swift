@@ -16,9 +16,16 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     var posterName = ""
     var postDescriptionWhy = ""
     var postDescriptionWhat = ""
+    var ProfilePic: UIImage? = nil
+    var FoodPic: UIImage? = nil
+    var Poster: User? = nil
+    var Timestamp = ""
     let postMapkit = "insert the map area here"
     let postReviews = ""
     var Coord = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+    var PosterID = ""
+    
+    var DGroup = DispatchGroup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +33,32 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
-        loadImage()
+        loadInformation()
+        tableView.estimatedRowHeight = 68.0
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
-    func loadImage(){
-        topImageView.image = UIImage(named:"cat-pet-animal-domestic-104827")
-        
+    func loadInformation(){
+        FireBaseDataBase().getUser(ID: PosterID, completion: {[weak self](U: User) in
+            self?.setLoadedData(U: U)
+        })
+        FireBaseDataBase().getFoodPicture(ID: PosterID, Timestamp: Timestamp, completion: {[weak self](I: UIImage) in
+            self?.setTopPicture(I: I
+            )
+        })
+    }
+    
+    func setLoadedData(U: User){
+        ProfilePic = U.ProfilePic
+        posterName = U.FirstName+" "+U.LastName
+        DispatchQueue.main.async{
+            self.tableView.reloadData()
+        }
+
+    }
+    
+    func setTopPicture(I: UIImage){
+        topImageView.image = I
     }
     
     func accessPhotosLibrary() {
@@ -50,30 +77,63 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath.row == 3) {
             return 150.0
-        } else {
+        }
+        else if (indexPath.row == 2) {
+            return UITableViewAutomaticDimension
+        }
+        else if (indexPath.row == 1) {
+            return UITableViewAutomaticDimension
+        }
+
+        else {
             return 40.0
         }
     }
+    
+    @objc(tableView:estimatedHeightForRowAtIndexPath:) func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.row == 3) {
+            return 150.0
+        }
+        else if (indexPath.row == 2) {
+            return 150
+        }
+        else if (indexPath.row == 1) {
+            return 150
+        }
+        else {
+            return 40.0
+        }
+
+    }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cellTemplateName = ""
         if indexPath.row == 3 {
             cellTemplateName = "mapcell"
-        } else {
+        } else if indexPath.row == 0{
             cellTemplateName = "UserName"
+        }
+        else{
+            cellTemplateName = "DetailCell"
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellTemplateName, for: indexPath)
         
         if indexPath.row == 0 {
             cell.textLabel!.text = posterName
-            cell.imageView!.image = UIImage(named:"cat-pet-animal-domestic-104827")
+            cell.imageView!.image = ProfilePic
             cell.imageView!.layer.cornerRadius = 20.0;
             cell.imageView!.clipsToBounds = true;
             
         } else if indexPath.row == 1 {
-            cell.textLabel!.text = postDescriptionWhy
+            let dc = cell as! DetailTableViewCell
+            dc.titleLabel.text = "Food Type"
+            dc.subTitleLabel.text = postDescriptionWhy
         } else if indexPath.row == 2 {
-            cell.textLabel!.text = postDescriptionWhat
+            let dc = cell as! DetailTableViewCell
+            dc.titleLabel!.text = "Description"
+            dc.subTitleLabel.text = postDescriptionWhat
+
         } else if indexPath.row == 3 {
             if let label = cell.textLabel {
                 label.removeFromSuperview()

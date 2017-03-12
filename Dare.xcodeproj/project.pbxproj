@@ -11,6 +11,8 @@
 		3D0980DF1E6C9F630026726C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0980DE1E6C9F630026726C /* DetailViewController.swift */; };
 		3D0980E11E6CA47A0026726C /* CustomPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0980E01E6CA47A0026726C /* CustomPin.swift */; };
 		3D0980E31E6CC8070026726C /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0980E21E6CC8070026726C /* UploadViewController.swift */; };
+		3D0980E51E74CAE80026726C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0980E41E74CAE80026726C /* User.swift */; };
+		3D0980E71E74FA220026726C /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0980E61E74FA220026726C /* DetailTableViewCell.swift */; };
 		3D7403F01E6C50DD00A5030A /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7403EF1E6C50DD00A5030A /* LoginScreenViewController.swift */; };
 		3D7403F21E6C511700A5030A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7403F11E6C511700A5030A /* MapViewController.swift */; };
 		3D7403F41E6C512C00A5030A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7403F31E6C512C00A5030A /* RegisterViewController.swift */; };
@@ -30,6 +32,8 @@
 		3D0980DE1E6C9F630026726C /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3D0980E01E6CA47A0026726C /* CustomPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPin.swift; sourceTree = "<group>"; };
 		3D0980E21E6CC8070026726C /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		3D0980E41E74CAE80026726C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3D0980E61E74FA220026726C /* DetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		3D7403EF1E6C50DD00A5030A /* LoginScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		3D7403F11E6C511700A5030A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3D7403F31E6C512C00A5030A /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -86,20 +90,22 @@
 			children = (
 				3DB230401E6C40CE005775D8 /* AppDelegate.swift */,
 				3DB230471E6C40CE005775D8 /* Assets.xcassets */,
-				3DB230491E6C40CE005775D8 /* LaunchScreen.storyboard */,
+				3D0980E01E6CA47A0026726C /* CustomPin.swift */,
+				3D0980DE1E6C9F630026726C /* DetailViewController.swift */,
+				3D7403F91E6C5D0F00A5030A /* FireBaseDataBase.swift */,
 				3D7404021E6C894A00A5030A /* GoogleService-Info.plist */,
 				3DB2304C1E6C40CE005775D8 /* Info.plist */,
-				3D7403EF1E6C50DD00A5030A /* LoginScreenViewController.swift */,
-				3D7403F11E6C511700A5030A /* MapViewController.swift */,
-				3D7403F31E6C512C00A5030A /* RegisterViewController.swift */,
-				3D7403FD1E6C754200A5030A /* Main.storyboard */,
-				3D7403F71E6C567000A5030A /* Startup.storyboard */,
-				3D7403F91E6C5D0F00A5030A /* FireBaseDataBase.swift */,
+				3DB230491E6C40CE005775D8 /* LaunchScreen.storyboard */,
 				3D7403FB1E6C601200A5030A /* Location.swift */,
 				3D7404041E6C977F00A5030A /* LoginRegisterViewController.swift */,
-				3D0980DE1E6C9F630026726C /* DetailViewController.swift */,
-				3D0980E01E6CA47A0026726C /* CustomPin.swift */,
+				3D7403EF1E6C50DD00A5030A /* LoginScreenViewController.swift */,
+				3D7403FD1E6C754200A5030A /* Main.storyboard */,
+				3D7403F11E6C511700A5030A /* MapViewController.swift */,
+				3D7403F31E6C512C00A5030A /* RegisterViewController.swift */,
+				3D7403F71E6C567000A5030A /* Startup.storyboard */,
 				3D0980E21E6CC8070026726C /* UploadViewController.swift */,
+				3D0980E41E74CAE80026726C /* User.swift */,
+				3D0980E61E74FA220026726C /* DetailTableViewCell.swift */,
 			);
 			path = Dare;
 			sourceTree = "<group>";
@@ -259,10 +265,12 @@
 				3D7403FA1E6C5D0F00A5030A /* FireBaseDataBase.swift in Sources */,
 				3D7404051E6C977F00A5030A /* LoginRegisterViewController.swift in Sources */,
 				3DB230411E6C40CE005775D8 /* AppDelegate.swift in Sources */,
+				3D0980E71E74FA220026726C /* DetailTableViewCell.swift in Sources */,
 				3D7403FC1E6C601200A5030A /* Location.swift in Sources */,
 				3D0980E11E6CA47A0026726C /* CustomPin.swift in Sources */,
 				3D7403F41E6C512C00A5030A /* RegisterViewController.swift in Sources */,
 				3D0980DF1E6C9F630026726C /* DetailViewController.swift in Sources */,
+				3D0980E51E74CAE80026726C /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
